@@ -1,0 +1,34 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Currency Convertor";
+}
+
+<div>
+    <h1 class="display-4">Currency Convertor</h1>
+    <p>Convert the currency</p>
+
+    <form method="post" class="form-inline">
+        <input class="form-control mr-2" type="number" step="0.01" placeholder="100.00" asp-for="CurrencyConvertorRequest.Value" />
+
+        <select class="form-control mr-4" 
+                asp-for="CurrencyConvertorRequest.FromCurrencyCode" 
+                asp-items="Html.GetEnumSelectList<FromCurrencyCode>()">
+            <option value="">From</option>
+        </select>
+
+        <p class="mr-2">Convert to</p>
+        <select class="form-control mr-2" 
+                asp-for="CurrencyConvertorRequest.ToCurrencyCode" 
+                asp-items="Html.GetEnumSelectList<ToCurrencyCode>()">
+            <option value="">To</option>
+        </select>
+
+        <button class="btn btn-primary" type="submit">Convert</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.ResultText))
+    {
+        <p>@Model.ResultText</p>
+    }
+</div>
